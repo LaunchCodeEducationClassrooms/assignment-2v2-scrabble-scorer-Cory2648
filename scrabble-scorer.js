@@ -59,13 +59,9 @@ let vowelBonusScore = function(word){
   return score
 };
 
-let simple = {name: "Simple Score", description: "Each letter is worth 1 point.", scoreFunction: simpleScore };
-let bonus = {name: "Bonus Vowels", description: "Vowels are 3 pts, consonants are 1 pt.", scoreFunction: vowelBonusScore };
-let scrabble = {name: "Scrabble", description: "The traditional scoring algorithm.", scoreFunction: oldScrabbleScorer };
-
 let scrabbleScore;
 
-const scoringAlgorithms = [simple, bonus, scrabble];
+const scoringAlgorithms = [ Object({ name: 'Simple Score', description: 'Each letter is worth 1 point.', scoreFunction: Function }), Object({ name: 'Bonus Vowels', description: 'Vowels are 3 pts, consonants are 1 pt.', scoreFunction: Function }), Object({ name: 'Scrabble', description: 'The traditional scoring algorithm.', scoreFunction: Function }) ];
 
 function scorerPrompt() {
    console.log("Let's play some scrabble!" + "\n");
