@@ -60,7 +60,7 @@ let vowelBonusScore = function(word){
 };
 
 let scrabbleScore = function (word) {
-	word = word.toUpperCase();
+	word = word.toLowerCase();
 	let letterPoints = 0;
 	for (let i = 0; i < word.length; i++) {
     for (item in newPointStructure) {
@@ -83,13 +83,15 @@ function transform(object) {
   let newObject = {}
   for (item in object){
     for (i = 0; i < object[item].length; i ++){
-      newObject[object[item][i]] = Number(item)
+     let newLetterKey = object[item][i];
+     newLetterKey = newLetterKey.toLowerCase();
+     newObject[newLetterKey] = Number(item);
     }
   }
   return newObject
 };
 let newPointStructure = transform(oldPointStructure);
-
+console.log(newPointStructure)
 function runProgram() {
    initialPrompt();
    scorerPrompt();
