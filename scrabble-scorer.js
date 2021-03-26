@@ -62,32 +62,28 @@ let vowelBonusScore = function(word){
 let scrabbleScore = function (word) {
 	word = word.toUpperCase();
 	let letterPoints = 0;
- 
 	for (let i = 0; i < word.length; i++) {
- 
-	  for (const pointValue in newPointStructure) {
- 
-		 if (newPointStructure[pointValue].includes(word[i])) {
-			letterPoints += pointValue
-		 }
- 
+    for (item in newPointStructure) {
+      if (item === word[i]){
+       letterPoints += newPointStructure[item]
+      }
 	  }
 	}
 	return letterPoints;
  };
 
-const scoringAlgorithms = [ Object({ name: 'Simple Score', description: 'Each letter is worth 1 point.', scorerFunction: simpleScore }), Object({ name: 'Bonus Vowels', description: 'Vowels are 3 pts, consonants are 1 pt.', scorerFunction: vowelBonusScore }), Object({ name: 'Scrabble', description: 'The traditional scoring algorithm.', scorerFunction: scrabbleScore }) ];
+const scoringAlgorithms = [ Object({ name: 'Simple Score', description: 'Each letter is worth 1 point.', scoringFunction: simpleScore }), Object({ name: 'Bonus Vowels', description: 'Vowels are 3 pts, consonants are 1 pt.', scoringFunction: vowelBonusScore }), Object({ name: 'Scrabble', description: 'The traditional scoring algorithm.', scoringFunction: scrabbleScore }) ];
 
 function scorerPrompt(word) {
    let algorithm = input.question("Which scoring algorithm would you like to use?" + "\n" + "0 - Simple: One point per character" + "\n" + "1 - Vowel Bonus: Vowels are worth 3 points" + "\n" + "2 - Scrabble: Uses scrabble point system" + "\n" + "Enter 0, 1, or 2: ")
    console.log("algorithm name: ", scoringAlgorithms[algorithm].name);
-   console.log("scorerFunction result: ", scoringAlgorithms[algorithm].scorerFunction(initialWord));
+   console.log("scorerFunction result: ", scoringAlgorithms[algorithm].scoringFunction(initialWord));
 };
 function transform(object) {
   let newObject = {}
   for (item in object){
     for (i = 0; i < object[item].length; i ++){
-      newObject[object[item][i]] = item
+      newObject[object[item][i]] = Number(item)
     }
   }
   return newObject
